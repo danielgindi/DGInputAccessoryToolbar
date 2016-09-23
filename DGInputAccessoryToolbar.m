@@ -2,7 +2,6 @@
 //  DGInputAccessoryToolbar.m
 //  DGInputAccessoryToolbar
 //
-//  Created by Daniel Cohen Gindi on 2/7/13.
 //  Copyright (c) 2013 danielgindi@gmail.com. All rights reserved.
 //
 //  https://github.com/danielgindi/DGInputAccessoryToolbar
@@ -32,10 +31,6 @@
 
 #import "DGInputAccessoryToolbar.h"
 
-#ifndef IS_IOS7_OR_GREATER
-#define IS_IOS7_OR_GREATER                  ([UIDevice.currentDevice.systemVersion compare:@"7.0" options:NSNumericSearch] >= NSOrderedSame)
-#endif
-
 @interface DGInputAccessoryToolbar ()
 @end
 
@@ -53,17 +48,8 @@
     rect.size.height = 44.f;
     self.frame = rect;
     
-    if (IS_IOS7_OR_GREATER)
-    {
-        self.barStyle = UIBarStyleDefault;
-        self.tintColor = UIColor.blackColor;
-    }
-    else
-    {
-        self.barStyle = UIBarStyleBlackTranslucent;
-        self.translucent = YES;
-        //self.tintColor = UIColor.darkGrayColor;
-    }
+    self.barStyle = UIBarStyleDefault;
+    self.tintColor = UIColor.blackColor;
     
     NSString *prevString, *nextString;
     
@@ -88,14 +74,6 @@
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < 70000
         segmented.segmentedControlStyle = UISegmentedControlStyleBar;
 #endif
-        if (IS_IOS7_OR_GREATER)
-        {
-            // Color will come from tint automatically
-        }
-        else
-        {
-            segmented.tintColor = [UIColor darkGrayColor];
-        }
         
         segmented.momentary = YES;
         [items addObject:[[UIBarButtonItem alloc] initWithCustomView:segmented]];
@@ -104,10 +82,7 @@
     UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:actionTarget action:doneActionSelector];
     
-    if (IS_IOS7_OR_GREATER)
-    {
-        doneButton.tintColor = UIColor.blackColor;
-    }
+    doneButton.tintColor = UIColor.blackColor;
     
     [items addObject:flexSpace];
     [items addObject:doneButton];
